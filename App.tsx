@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import HomeScreen from './src/screens/HomeScreen';
 import AktivnostScreen from './src/screens/AktivnostScreen';
@@ -76,32 +77,34 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerStyle: { backgroundColor: '#2563eb' },
-          headerTintColor: '#ffffff',
-        }}
-      >
-        <Stack.Screen name="Domov" options={{ title: 'Šolsko delo' }}>
-          {(props) => (
-            <HomeScreen
-              {...props}
-              aktivnosti={aktivnosti}
-              onToggle={preklopiOpravljeno}
-            />
-          )}
-        </Stack.Screen>
-        <Stack.Screen name="Aktivnost" options={{ title: 'Aktivnost' }}>
-          {(props) => (
-            <AktivnostScreen
-              {...props}
-              onSave={shraniAktivnost}
-              onDelete={izbrisiAktivnost}
-            />
-          )}
-        </Stack.Screen>
-      </Stack.Navigator>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: { backgroundColor: '#2563eb' },
+            headerTintColor: '#ffffff',
+          }}
+        >
+          <Stack.Screen name="Domov" options={{ title: 'Šolsko delo' }}>
+            {(props) => (
+              <HomeScreen
+                {...props}
+                aktivnosti={aktivnosti}
+                onToggle={preklopiOpravljeno}
+              />
+            )}
+          </Stack.Screen>
+          <Stack.Screen name="Aktivnost" options={{ title: 'Aktivnost' }}>
+            {(props) => (
+              <AktivnostScreen
+                {...props}
+                onSave={shraniAktivnost}
+                onDelete={izbrisiAktivnost}
+              />
+            )}
+          </Stack.Screen>
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }

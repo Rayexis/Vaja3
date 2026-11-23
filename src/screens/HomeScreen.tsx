@@ -8,6 +8,7 @@ import {
   Animated,
   useWindowDimensions,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Aktivnost, RootStackParamList } from '../types';
 
@@ -32,7 +33,7 @@ export default function HomeScreen({ navigation, aktivnosti, onToggle }: Props) 
   const jeSirokZaslon = width > 600;
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['bottom']}>
       <Animated.View
         style={[
           styles.vsebina,
@@ -107,7 +108,7 @@ export default function HomeScreen({ navigation, aktivnosti, onToggle }: Props) 
           <Text style={styles.dodajGumbTekst}>+ Nova aktivnost</Text>
         </TouchableOpacity>
       </Animated.View>
-    </View>
+    </SafeAreaView>
   );
 }
 
